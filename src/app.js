@@ -33,22 +33,22 @@ const Playlist = new mongoose.model("Playlist", playlistSchema)
 
 
 // insert document
-// const insertSingleDocument = async () => {
-//     try { 
-//         const reactPlaylist = new Playlist({
-//             name: "React JS",
-//             type: "Front End",
-//             videos: 80,
-//             author: "Vishal Sengar",
-//             active: true,
-//         })
+const insertSingleDocument = async () => {
+    try { 
+        const reactPlaylist = new Playlist({
+            name: "React JS",
+            type: "Front End",
+            videos: 80,
+            author: "Vishal Sengar",
+            active: true,
+        })
             
-//         const result = await reactPlaylist.save()
-//         console.log(result)
-//     } catch (err) {
-//         console.log(err)
-//     } 
-// }
+        const result = await reactPlaylist.save()
+        console.log(result)
+    } catch (err) {
+        console.log(err)
+    } 
+}
 
 // insertSingleDocument()
 
@@ -99,5 +99,14 @@ const insertMultipleDocuments = async () => {
     } 
 }
 
-insertMultipleDocuments()
+//insertMultipleDocuments()
 
+
+// read documents
+const getDocument = async () => {
+    const result = await Playlist.find({ type: "Front End" })
+        .select({ name: 1 })
+    console.log(result)
+}
+
+getDocument()
