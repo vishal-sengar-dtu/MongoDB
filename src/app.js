@@ -7,7 +7,7 @@ mongoose.connect("mongodb://localhost:27017/Youtube",
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() => console.log("Connecting to Database..."))
+    .then(() => console.log("Connected to Database..."))
     .catch(err => console.log(err))
 
 
@@ -32,23 +32,72 @@ const playlistSchema = new mongoose.Schema({
 const Playlist = new mongoose.model("Playlist", playlistSchema)
 
 
-// create or insert document
-const createDocument = async () => {
+// insert document
+// const insertSingleDocument = async () => {
+//     try { 
+//         const reactPlaylist = new Playlist({
+//             name: "React JS",
+//             type: "Front End",
+//             videos: 80,
+//             author: "Vishal Sengar",
+//             active: true,
+//         })
+            
+//         const result = await reactPlaylist.save()
+//         console.log(result)
+//     } catch (err) {
+//         console.log(err)
+//     } 
+// }
+
+// insertSingleDocument()
+
+
+// insert multiple document
+const insertMultipleDocuments = async () => {
     try { 
-        const reactPlaylist = new Playlist({
-            name: "Node JS",
+        const expressPlaylist = new Playlist({
+            name: "Express JS",
             type: "Back End",
-            videos: 50,
+            videos: 20,
+            author: "Vishal Sengar",
+            active: true,
+        })
+        const mongoPlaylist = new Playlist({
+            name: "MongoDB",
+            type: "Database",
+            videos: 40,
+            author: "Vishal Sengar",
+            active: true,
+        })
+        const mongoosePlaylist = new Playlist({
+            name: "Mongoose JS",
+            type: "Database",
+            videos: 10,
+            author: "Vishal Sengar",
+            active: true,
+        })
+        const jsPlaylist = new Playlist({
+            name: "Javascript",
+            type: "Front End",
+            videos: 150,
+            author: "Vishal Sengar",
+            active: true,
+        })
+        const gitPlaylist = new Playlist({
+            name: "Git",
+            type: "Dev Tools",
+            videos: 20,
             author: "Vishal Sengar",
             active: true,
         })
             
-        const result = await reactPlaylist.save()
+        const result = await Playlist.insertMany([ expressPlaylist, mongoPlaylist, mongoosePlaylist, jsPlaylist, gitPlaylist ])
         console.log(result)
     } catch (err) {
         console.log(err)
     } 
 }
 
-createDocument()
+insertMultipleDocuments()
 
