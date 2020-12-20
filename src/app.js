@@ -103,11 +103,24 @@ const insertMultipleDocuments = async () => {
 
 
 // read documents
-// comparision operators $eq, $lt. $lte, $gt, $gte, $in, $nin
+// comparision operators $eq, $lt, $lte, $gt, $gte, $in, $nin
+// logical operators $and, $or, $not, $nor
 const getDocument = async () => {
     try {
         const result = await Playlist
-            .find({ type: { $nin: ["Back End", "Database"] } })
+            .find({
+                $and: [
+                    {
+                        $or: [
+                            { type: "Back End" },
+                            { type: "Database" }
+                        ]
+                    },
+                    {
+                        videos: { $gt: 30 }
+                    }
+                ]
+            })
             .select({
                 name: 1,
                 videos: 1
@@ -116,7 +129,6 @@ const getDocument = async () => {
     } catch (err) { 
         console.log(err)
     }
-    
 }
 
 getDocument()
