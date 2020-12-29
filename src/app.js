@@ -106,7 +106,7 @@ const insertMultipleDocuments = async () => {
 // comparision operators $eq, $lt, $lte, $gt, $gte, $in, $nin
 // logical operators $and, $or, $not, $nor
 // .countDocuments()
-// sorting
+// sort({ field: 1, -1 })
 const getDocument = async () => {
     try {
         const result = await Playlist
@@ -116,7 +116,7 @@ const getDocument = async () => {
                 videos: 1,
                 _id: 0
             })
-            .sort({ videos: 1, name: -1 })
+            //.sort({ videos: 1, name: -1 })
             //.countDocuments()
         
         console.log(result)
@@ -125,4 +125,21 @@ const getDocument = async () => {
     }
 }
 
-getDocument()
+//getDocument()
+
+// update documents
+const updateDocument = async (_id) => {
+    try {
+        const result = await Playlist
+            .findByIdAndUpdate(
+                { _id },
+                { $set: { name: "Node JS" } },
+                { new: true }
+            )
+        console.log(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+updateDocument("5fde0e8dda11bb13cc721a5c")
