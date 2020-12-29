@@ -142,4 +142,16 @@ const updateDocument = async (_id) => {
     }
 }
 
-updateDocument("5fde0e8dda11bb13cc721a5c")
+//updateDocument("5fde0e8dda11bb13cc721a5c")
+
+// delete documents
+const deleteDocument = async (_id) => {
+    try {
+        const result = await Playlist.findByIdAndDelete({ _id })
+        console.log(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+//deleteDocument("5fde0e8dda11bb13cc721a5c")
